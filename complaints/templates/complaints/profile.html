@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Complaints - Profile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4ff;
+      padding: 40px;
+    }
+
+    .profile-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #4d5dfb;
+      margin-bottom: 30px;
+    }
+
+    .complaint-card {
+      border: 1px solid #ccc;
+      border-left: 5px solid #4d5dfb;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 25px;
+      background: #fafafa;
+    }
+
+    .complaint-card h3 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .status {
+      font-weight: bold;
+      color: #4d5dfb;
+    }
+
+    .progress-track {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #ccc;
+    }
+
+    .circle.active {
+      background-color: #4d5dfb;
+    }
+
+    .line {
+      flex-grow: 1;
+      height: 3px;
+      background-color: #ccc;
+      margin: 0 5px;
+    }
+
+    .line.active {
+      background-color: #4d5dfb;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-box">
+    <h2>Registered Complaints</h2>
+
+    {% for complaint in complaints %}
+      <div class="complaint-card">
+        <h3>{{ complaint.subject }}</h3>
+        <p>{{ complaint.description }}</p>
+        <p>Status: <span class="status">{{ complaint.status }}</span></p>
+
+        <div class="progress-track">
+          <div class="circle {% if complaint.status != 'Pending' %}active{% endif %}"></div>
+          <div class="line {% if complaint.status == 'In Progress' or complaint.status == 'Resolved' %}active{% endif %}"></div>
+          <div class="circle {% if complaint.status == 'In Progress' or complaint.status == 'Resolved' %}active{% endif %}"></div>
+          <div class="line {% if complaint.status == 'Resolved' %}active{% endif %}"></div>
+          <div class="circle {% if complaint.status == 'Resolved' %}active{% endif %}"></div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No complaints found.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>
