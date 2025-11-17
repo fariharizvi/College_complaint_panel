@@ -1,5 +1,97 @@
-<h2>Submit Complaint</h2>
-<form method="post">{% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Submit</button>
-</form>
+{% extends "complaints/base.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        background: #f2f6ff;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .complaint-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 40px;
+    }
+
+    .complaint-card {
+        background: #ffffff;
+        width: 650px;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 8px 30px rgba(0, 0, 50, 0.15);
+        border-top: 4px solid #2b53ff;
+    }
+
+    .complaint-card h2 {
+        text-align: center;
+        color: #2b3a67;
+        font-weight: 600;
+        margin-bottom: 25px;
+    }
+
+    .complaint-card label {
+        font-weight: 500;
+        color: #2b3a67;
+        margin-top: 10px;
+    }
+
+    .complaint-card input,
+    .complaint-card textarea,
+    .complaint-card select {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        border-radius: 10px;
+        border: 1px solid #ccd3e0;
+        font-size: 15px;
+    }
+
+    .complaint-btn {
+        width: 100%;
+        background: #2b53ff;
+        color: #fff;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .complaint-btn:hover {
+        background: #1f3cd6;
+    }
+</style>
+
+<div class="complaint-wrapper">
+    <div class="complaint-card">
+        <h2>Submit a Complaint</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Complaint Title:</label>
+            <input type="text" name="title" placeholder="Enter complaint title" required>
+
+            <label>Category:</label>
+            <select name="category" required>
+                <option value="">Select</option>
+                <option value="Hostel">Hostel</option>
+                <option value="Academics">Academics</option>
+                <option value="Facilities">Facilities</option>
+                <option value="Ragging">Ragging</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label>Description:</label>
+            <textarea name="description" rows="5" placeholder="Explain your issue..." required></textarea>
+
+            <button type="submit" class="complaint-btn">Submit Complaint</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

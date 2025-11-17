@@ -1,0 +1,24 @@
+{% extends "complaints/base.html" %}
+{% block content %}
+
+<div class="container mt-5 p-4" style="background:white; border-radius:12px; width:70%;">
+    <h2>Your Complaints</h2>
+    <hr>
+
+    {% if complaints %}
+        <ul>
+            {% for c in complaints %}
+                <li>
+                    <strong>{{ c.subject }}</strong> - {{ c.status }}
+                    <br>
+                    {{ c.description }}
+                    <hr>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No complaints submitted.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

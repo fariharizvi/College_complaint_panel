@@ -1,74 +1,71 @@
+{% extends 'complaints/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Welcome to Complaint Panel</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f4ff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+
+{% block title %}Home - Complaint Panel{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero {
+        height: 90vh;
+        background: url("{% static 'images/home_bg.jpg' %}") no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        padding-left: 80px;
+        color: white;
+        position: relative;
+        margin-top: 75px;
     }
 
-    .welcome-box {
-      background-color: white;
-      padding: 40px;
-      border: 3px solid #2636e8;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.45);
     }
 
-    .welcome-box h1 {
-      margin-bottom: 20px;
-      color: #2636e8;
-      font-size: 26px;
+    .hero-content {
+        position: relative;
+        max-width: 500px;
     }
 
-    .welcome-box p {
-      font-size: 18px;
-      color: #444;
-      margin-bottom: 30px;
-      line-height: 1.5;
+    .hero h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin: 0;
     }
 
-    .button-group {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
+    .hero p {
+        font-size: 18px;
+        margin: 15px 0 30px;
+        line-height: 1.5;
     }
 
-    .button-group a button {
-      padding: 10px 25px;
-      font-size: 16px;
-      border: 2px solid #2636e8;
-      background-color: transparent;
-      color: #2636e8;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: 0.3s ease;
+    .hero a {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #00c8ff;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: 0.3s;
     }
 
-    .button-group a button:hover {
-      background-color: #2636e8;
-      color: white;
+    .hero a:hover {
+        background: #0088bb;
     }
-  </style>
-</head>
-<body>
-  <div class="welcome-box">
-    <h1>Welcome to Complaint Panel</h1>
-    <p>Feel free to register your complaint.<br>We are here 24×7 to help you.</p>
-    <div class="button-group">
-      <a href="{% url 'register' %}"><button>Register</button></a>
-      <a href="{% url 'login' %}"><button>Login</button></a>
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-content">
+        <h1>College Complaint Management</h1>
+        <p>Submit complaints easily, track progress and get faster resolution through our online portal.</p>
+        <a  href="{% url 'register' %}">Get Started</a>
     </div>
-  </div>
-</body>
-</html>
+</div>
+{% endblock %}
