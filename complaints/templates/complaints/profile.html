@@ -1,5 +1,4 @@
 {% extends "complaints/base.html" %}
-
 {% block content %}
 
 <style>
@@ -22,7 +21,6 @@
         border-radius: 18px;
         box-shadow: 0 8px 30px rgba(0, 0, 50, 0.15);
         border-top: 4px solid #2b53ff;
-        animation: fadeIn 0.6s ease-in-out;
     }
 
     .profile-card h2 {
@@ -30,22 +28,6 @@
         color: #2b3a67;
         font-weight: 600;
         margin-bottom: 25px;
-    }
-
-    .profile-card label {
-        font-weight: 500;
-        color: #2b3a67;
-        margin-top: 10px;
-    }
-
-    .profile-card input,
-    .profile-card textarea {
-        width: 100%;
-        padding: 12px;
-        margin-top: 5px;
-        border-radius: 10px;
-        border: 1px solid #ccd3e0;
-        font-size: 15px;
     }
 
     .profile-btn {
@@ -78,10 +60,19 @@
         object-fit: cover;
         border: 3px solid #2b53ff;
     }
+
+    input, textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ccd3e0;
+        margin-bottom: 15px;
+    }
 </style>
 
 <div class="profile-wrapper">
     <div class="profile-card">
+
         <h2>My Profile</h2>
 
         <div class="profile-picture">
@@ -91,20 +82,12 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <label>Username:</label>
-            <input type="text" name="username" value="{{ user.username }}" required>
-
-            <label>Email:</label>
-            <input type="email" name="email" value="{{ user.email }}" required>
-
-            <label>About Me:</label>
-            <textarea name="bio" rows="3">{{ user.profile.bio }}</textarea>
-
-            <label>Update Profile Picture:</label>
-            <input type="file" name="image">
+            {{ u_form.as_p }}
+            {{ p_form.as_p }}
 
             <button type="submit" class="profile-btn">Update Profile</button>
         </form>
+
     </div>
 </div>
 

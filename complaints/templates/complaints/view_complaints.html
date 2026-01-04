@@ -8,10 +8,19 @@
     {% if complaints %}
         <ul>
             {% for c in complaints %}
-                <li>
-                    <strong>{{ c.subject }}</strong> - {{ c.status }}
+                <li style="margin-bottom:20px;">
+                    <strong>{{ c.title }}</strong> 
+                    <span style="color:green;">({{ c.status }})</span>
                     <br>
-                    {{ c.description }}
+                    <p>{{ c.description }}</p>
+
+                    {% if c.reply %}
+                        <div style="background:#f0f7ff; padding:10px; border-left:4px solid #2b53ff; border-radius:5px;">
+                            <strong>Admin Reply:</strong><br>
+                            {{ c.reply }}
+                        </div>
+                    {% endif %}
+
                     <hr>
                 </li>
             {% endfor %}

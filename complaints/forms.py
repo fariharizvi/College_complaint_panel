@@ -1,7 +1,20 @@
 from django import forms
-from .models import Complaint
+from django.contrib.auth.models import User
+from .models import Profile, Complaint
 
 class ComplaintForm(forms.ModelForm):
     class Meta:
         model = Complaint
-        fields = ['subject', 'description']
+        fields = ['title', 'category', 'description']
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']

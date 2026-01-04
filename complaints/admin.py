@@ -1,29 +1,38 @@
 from django.contrib import admin
-from .models import Complaint
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import Complaint
 
-@admin.register(Complaint)
+
 class ComplaintAdmin(admin.ModelAdmin):
-    list_display = ['subject', 'user', 'status', 'date_submitted']
-    list_editable = ['status']
-    readonly_fields = ['user', 'subject', 'description', 'date_submitted']
-    fields = ['user', 'subject', 'description', 'status', 'admin_reply', 'date_submitted']
+    list_display = ("title", "user", "category", "status", "created_at")
+    readonly_fields = ("user", "title", "category", "description")
 
+    # ✅ Properly indented inside the class
     def save_model(self, request, obj, form, change):
-        if change:  # Only send email if it's an update
-            subject = f"Complaint Update: {obj.subject}"
+        if change:  # Send email only on update
+            subject = f"Complaint Update: {obj.title}"
             message = f"""
 Hello {obj.user.username},
 
 Your complaint has been updated.
 
 Status: {obj.status}
-Reply: {obj.admin_reply or 'No reply'}
+Reply: {obj.reply or 'No reply provided yet.'}
 
 Regards,
-College Complaint System
+Complaint Management System
 """
-            send_mail(subject, message, settings.EMAIL_HOST_USER, [obj.user.email])
+
+            send_mail(
+                subject,
+                message,
+                settings.EMAIL_HOST_USER,
+                [obj.user.email],
+                fail_silently=True,
+            )
 
         super().save_model(request, obj, form, change)
+
+
+admin.site.register(Complaint, ComplaintAdmin)
