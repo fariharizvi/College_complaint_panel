@@ -6,5 +6,6 @@ This Django-based web application is designed to manage and resolve student comp
 3. Admin dashboard for managing complaints
 4. Complaint status updates and replies
 5. Profile view and logout functionality
-6. <img width="1920" height="1080" alt="demo" src="https://github.com/user-attachments/assets/2610327e-2233-473f-a23f-eeb0d06486d3" />
+<img width="1920" height="913" alt="Demo" src="https://github.com/user-attachments/assets/771b411e-0267-4c01-bbb2-0ecd461f0276" />
+
 
