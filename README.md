@@ -1,5 +1,3 @@
-<img width="1920" height="1080" alt="Screenshot (483)" src="https://github.com/user-attachments/assets/f0d28417-e98b-4dab-af6f-145fefdc6f37" /># College_complaint_panel
-
 This Django-based web application is designed to manage and resolve student complaints in a college environment. Students can register, log in, and submit complaints. Admins can view all submitted complaints and reply to them. The platform offers a user-friendly interface for smooth communication between students and administration.
 
 🔧 Features:
