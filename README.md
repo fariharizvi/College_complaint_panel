@@ -27,6 +27,7 @@ Features:
 3.5 Admin reply system
 3.6 Automatic email notification on complaint updates
 
-<img width="1920" height="913" alt="Demo" src="https://github.com/user-attachments/assets/771b411e-0267-4c01-bbb2-0ecd461f0276" />
+<img width="1920" height="886" alt="Screenshot (516)" src="https://github.com/user-attachments/assets/7ed604d7-2465-4a86-961a-46b1cc1752b2" />
+
 
 
