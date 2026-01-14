@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Complaint(models.Model):
 
+
     STATUS_CHOICES = [
         ("Pending", "Pending"),
         ("In Progress", "In Progress"),
@@ -17,6 +18,12 @@ class Complaint(models.Model):
         ("Critical", "Critical"),
     ]
 
+    STATUS_CHOICES = [
+        ("Pending", "Pending"),
+        ("In Progress", "In Progress"),
+        ("Resolved", "Resolved"),
+        ("Rejected", "Rejected"),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     category = models.CharField(max_length=100)
@@ -24,6 +31,7 @@ class Complaint(models.Model):
     reply = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="Pending")
     created_at = models.DateTimeField(auto_now_add=True)
+
 
         # New psychological fields
     stress_score = models.FloatField(default=0.0)
@@ -41,6 +49,7 @@ class Complaint(models.Model):
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.title

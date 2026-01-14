@@ -103,6 +103,7 @@ def submit_complaint(request):
             complaint = form.save(commit=False)
             complaint.user = request.user
 
+
             # Psychological analysis
             score, emotion, priority = analyze_psychological_state(
                 complaint.description
@@ -120,6 +121,12 @@ def submit_complaint(request):
             )
             return redirect('dashboard')
 
+
+            complaint.save()
+
+            messages.success(request, "Complaint submitted successfully!")
+            return redirect('dashboard')
+
         else:
             messages.error(request, "Error! Please fill all fields correctly.")
 
@@ -127,7 +134,6 @@ def submit_complaint(request):
         form = ComplaintForm()
 
     return render(request, 'complaints/submit_complaint.html', {'form': form})
-
 
 
 # ===========================
