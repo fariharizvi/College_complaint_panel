@@ -8,14 +8,13 @@ from django.utils.html import format_html
 
 
 class ComplaintAdmin(admin.ModelAdmin):
-    # 🔹 OLD CODE (kept)
-    list_display = ['title', 'user', 'status', 'created_at']
 
-    # 🔹 NEW: add priority & psychological info to admin list
+    list_display = ['title', 'user', 'status', 'created_at']
     list_display += ['colored_priority', 'emotion_label', 'stress_score']
 
     list_editable = ['status']
     readonly_fields = ['user', 'title', 'description', 'created_at']
+
     fields = [
         'user',
         'title',
@@ -37,30 +36,15 @@ class ComplaintAdmin(admin.ModelAdmin):
         }
         color = color_map.get(obj.priority, "black")
         return format_html(
-            '<b style="color:{};">{}</b>',
+            '<strong style="color:{};">{}</strong>',
             color,
             obj.priority
         )
 
     colored_priority.short_description = "Priority"
 
-
-    # 🔹 NEW: priority-based ordering logic
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.annotate(
-            priority_order=Case(
-                When(priority='Critical', then=Value(1)),
-                When(priority='High', then=Value(2)),
-                When(priority='Medium', then=Value(3)),
-                When(priority='Low', then=Value(4)),
-                output_field=IntegerField(),
-            )
-        ).order_by('priority_order', '-created_at')
-
-    # 🔹 OLD CODE (kept)
     def save_model(self, request, obj, form, change):
-        if change:  # Only send email if it's an update
+        if change:
             subject = f"Complaint Update: {obj.title}"
             message = f"""
 Hello {obj.user.username},
@@ -74,7 +58,6 @@ Reply: {obj.reply or 'No reply'}
 Regards,
 Complaint Management System
 """
-
             send_mail(
                 subject,
                 message,
@@ -84,6 +67,3 @@ Complaint Management System
             )
 
         super().save_model(request, obj, form, change)
-
-
-admin.site.register(Complaint, ComplaintAdmin)
